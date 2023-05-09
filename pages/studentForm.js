@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function StudentForm() {
 
     const randID = Math.floor(Math.random() * (99999 - 10000));
-    const [randomID, setRandomID] = useState(0);
+    const [randomID, setRandomID] = useState("");
     const [name, setName] = useState("");
     const [birthDate, setBirthDate] = useState("");
     const [gender, setGender] = useState("");
@@ -21,13 +21,14 @@ export default function StudentForm() {
         e.preventDefault();
 
         const data = { name, birthDate, gender, classes, address, phoneNumber, email };
-        const response = await fetch('/student', {
+        const response = await fetch('http://localhost:5000/student', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-        })
+        });
+
         console.log(data)
         if(response.ok) {
             alert('Form submitted successfully!');
@@ -98,8 +99,7 @@ export default function StudentForm() {
             <div class="a">
                 <Link href='/'>Home</Link>
             </div>
-            <Link href='/workOrder'>Work Order</Link>
-            <Link href='/application'>Next: Application</Link>
+            <Link href='/dorm'>Next: Dorm</Link>
         </div>
       </div>
     </>
